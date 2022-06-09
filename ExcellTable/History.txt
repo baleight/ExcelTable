@@ -1,0 +1,1 @@
+Setto ROW:7 | COL:N che prima era ""
