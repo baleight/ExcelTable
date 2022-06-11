@@ -143,7 +143,7 @@ public class MenuBarComponent extends JMenuBar
     private static void newFileEvent()
     {
         System.out.println("Cliccio new file");
-        Main.aggiornaExcelFrameDaHome();
+        Main.updateExcelFrameDaHome();
     }
     private static void githubLinkOpen()
     {
@@ -155,8 +155,8 @@ public class MenuBarComponent extends JMenuBar
     }
     private static void lineaGrafo() {
         chartEx=new ChartEx();
-        ArrayList<String> colDate = ExcelFrame.getColumnList(0);
-        ArrayList<String> colVal = ExcelFrame.getColumnList(1);
+        ArrayList<String> colDate = ExcelPane.getColumnList(0);
+        ArrayList<String> colVal = ExcelPane.getColumnList(1);
 
         if(colDate!=null&&colVal!=null){
             chartEx.LineaChartEx(colDate,colVal);
@@ -168,8 +168,8 @@ public class MenuBarComponent extends JMenuBar
 
     private static void barraGrafo() {
         chartEx=new ChartEx();
-        ArrayList<String> colDate = ExcelFrame.getColumnList(0);
-        ArrayList<String> colVal = ExcelFrame.getColumnList(1);
+        ArrayList<String> colDate = ExcelPane.getColumnList(0);
+        ArrayList<String> colVal = ExcelPane.getColumnList(1);
 
         if(colDate!=null&&colVal!=null){
             chartEx.BarChartEx(colDate,colVal);

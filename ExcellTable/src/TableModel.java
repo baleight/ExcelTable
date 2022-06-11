@@ -60,11 +60,11 @@ public class TableModel extends AbstractTableModel {
         if(!values.equals("")){
             if(values.charAt(0)=='='){
                 System.out.println("Entro in modalita calcolatore: ");
-                values = values.substring(1);
+                values = values.substring(1);//Vado avanti di uno
                 if(!(values.equals("")))
                     values= String.valueOf(calculator(values));
                 else
-                    values= String.valueOf("");
+                    values= String.valueOf("=");
             }
             String linea = "Setto ROW:"+ row + " | COL:" + FunAdditional.converterInLetter(col) + " che prima era \""
                     + cell[row].getValueAtCell(col) +"\"";
@@ -73,21 +73,9 @@ public class TableModel extends AbstractTableModel {
             System.out.println(" con \"" + cell[row].getValueAtCell(col)+"\"");
             fireTableCellUpdated(row, col);
             scanningMatrix();
-            insertIntoHistoryFile(linea);
         }
     }
-    /**
-     * Inserisco nel file History.txt le operazioni che eseguo come: Setto ROW:5 | COL:A che prima era "" con "32"
-     */
-    private void insertIntoHistoryFile(String linea) {
-        fileConfig.openFileLocallyForWritting("\\History.txt");
-        fileConfig.writeFile(linea);
-        try {
-            fileConfig.closeFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
     /** Aumento di 100 righe nella matrice */
     public void increaseMatrix(int quantitaRighe) {
         int dimNuovoRow = MAX_ROW+quantitaRighe;
@@ -176,6 +164,7 @@ public class TableModel extends AbstractTableModel {
         String operatore;//prendo l'operatore + * - /
         System.out.println("Espressione: "+valore + " LEN: "+valore.length());//A1+23
         int i = 0;
+        first_operand = "0";
         char car = valore.charAt(i);
         while (!(funAdd.isOperatore(car))){
             car = valore.charAt(i);
@@ -186,8 +175,10 @@ public class TableModel extends AbstractTableModel {
             }
         }
         if(i==valore.length()){
-            operatore = String.valueOf("+");//prendo l'operatore + * - /
-            first_operand=valore;
+            operatore = "+";//prendo l'operatore + * - /
+            if(funAdd.isNumber(valore.charAt(0)))
+                first_operand=valore;
+
             second_operand="0";
         }else {
             operatore = String.valueOf(car);//prendo l'operatore + * - /
@@ -212,15 +203,12 @@ public class TableModel extends AbstractTableModel {
         if(first_operand.equals(""))
             first_operand="0";
         // store the value in 1st
-        double result;
-        if (operatore.equals("+"))
-            result = (Double.parseDouble(first_operand) + Double.parseDouble(second_operand));
-        else if (operatore.equals("-"))
-            result = (Double.parseDouble(first_operand) - Double.parseDouble(second_operand));
-        else if (operatore.equals("/")||operatore.equals(":"))
-            result = (Double.parseDouble(first_operand) / Double.parseDouble(second_operand));
-        else
-            result = (Double.parseDouble(first_operand) * Double.parseDouble(second_operand));
+        double result = switch (operatore) {
+            case "+" -> (Double.parseDouble(first_operand) + Double.parseDouble(second_operand));
+            case "-" -> (Double.parseDouble(first_operand) - Double.parseDouble(second_operand));
+            case "/", ":" -> (Double.parseDouble(first_operand) / Double.parseDouble(second_operand));
+            default -> (Double.parseDouble(first_operand) * Double.parseDouble(second_operand));
+        };
         return result;
     }
     /**

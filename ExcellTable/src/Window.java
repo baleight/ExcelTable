@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe che estende JFrame e costituisce la finestra principale
+ */
 public class Window extends JFrame {
-    ExcelFrame frame;
+    ExcelPane mainPane;
     MenuBarComponent  menuBarComponent;
     Dimension screenSize;
     public Window(){
@@ -11,10 +14,10 @@ public class Window extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);//exit
         setResizable(true);
-        setJMenuBar(menuBarComponent);
-        frame = new ExcelFrame();
-        frame.setBackground(Color.WHITE);
-        add(frame, BorderLayout.CENTER);
+        setJMenuBar(menuBarComponent);//Sistemo la barra del menu
+        mainPane = new ExcelPane();//Creo il pannello principale
+        mainPane.setBackground(Color.WHITE);
+        add(mainPane, BorderLayout.CENTER);//Sistemo in centro il pannello principale nella finestra
         pack();
     }
     /**
@@ -25,18 +28,19 @@ public class Window extends JFrame {
         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int height = screenSize.height;
         int width = screenSize.width;
-        //setLocationByPlatform(true);
+        //Sistemo la finestra in mezzo
         setLocation((width  - width/2) / 2, (height - height/2) / 2);
+        //Inizializzo le dimensioni
         setPreferredSize(new Dimension(width/2, height/2));
         setTitle("Excel - Programmazione Oggetti");
     }
     /**
-     * Rimuovo il contenuto del panello e lo ri-aggiungo all'interno del Frame
+     * Rimuovo il pannello principale e lo ri-aggiungo all'interno del Frame
      */
     public void updateExcelFrame(){
-        this.remove(frame);
-        frame = new ExcelFrame();
-        add(frame, BorderLayout.CENTER);
+        this.remove(mainPane);
+        mainPane = new ExcelPane();
+        add(mainPane, BorderLayout.CENTER);
         pack();
     }
 

@@ -91,11 +91,11 @@ ROW: 3
 	COL H : 
 	COL I : 
 	COL J : 
-	COL K : 
+	COL K : 9.0
 	COL L : 
-	COL M : 432
-	COL N : 534
-	COL O : 
+	COL M : 
+	COL N : 
+	COL O : =
 	COL P : 
 	COL Q : 
 	COL R : 
@@ -120,8 +120,8 @@ ROW: 4
 	COL J : 
 	COL K : 
 	COL L : 
-	COL M : 43
-	COL N : 43
+	COL M : 
+	COL N : 
 	COL O : 
 	COL P : 
 	COL Q : 
@@ -147,8 +147,8 @@ ROW: 5
 	COL J : 
 	COL K : 
 	COL L : 
-	COL M : 42354
-	COL N : 43
+	COL M : 
+	COL N : 
 	COL O : 
 	COL P : 
 	COL Q : 
@@ -174,8 +174,8 @@ ROW: 6
 	COL J : 
 	COL K : 
 	COL L : 
-	COL M : 34
-	COL N : 43
+	COL M : 
+	COL N : 
 	COL O : 
 	COL P : 
 	COL Q : 
@@ -201,8 +201,8 @@ ROW: 7
 	COL J : 
 	COL K : 
 	COL L : 
-	COL M : 34
-	COL N : e
+	COL M : 
+	COL N : 
 	COL O : 
 	COL P : 
 	COL Q : 
